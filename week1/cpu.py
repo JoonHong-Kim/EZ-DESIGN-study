@@ -8,7 +8,6 @@ class CPU(ABC):
 
 
 class SingleCoreCPU(CPU):
-
     def process(self, tasks: list[int]) -> list[list[int]]:
         return [tasks]
 
