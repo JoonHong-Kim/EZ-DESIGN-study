@@ -13,6 +13,10 @@ class Memory(BaseModel, ABC):
     def read(self, idx: int) -> int:
         pass
 
+    @abstractmethod
+    def write(self, idx: int, value: int):
+        pass
+
 
 class Ram(Memory):
     def read(self, idx: int) -> int:
@@ -26,21 +30,28 @@ class Rom(Memory):
     def read(self, idx: int) -> int:
         return self.data[idx]
 
+    def write(self, idx: int, value: int):
+        raise ValueError("ROM is read-only")
+
 
 class MemoryFactory(ABC):
     @staticmethod
     @abstractmethod
-    def make_memory(*args, **kwargs) -> Memory:
+    def make_memory(size: int = 0, data: list[int] = []) -> Memory:
         pass
 
 
 class RamFactory(MemoryFactory):
     @staticmethod
-    def make_memory(size: int) -> Ram:
-        return Ram(data=list(range(size)))
+    def make_memory(size: int = 0, data: list[int] = []) -> Ram:
+        if data:
+            raise ValueError("RAM cannot be initialized with data")
+        return Ram(data=[0] * size)
 
 
 class RomFactory(MemoryFactory):
     @staticmethod
-    def make_memory(data: list[int]) -> Rom:
+    def make_memory(size: int = 0, data: list[int] = []) -> Rom:
+        if size > 0:
+            raise ValueError("ROM cannot be initialized with size")
         return Rom(data=data)

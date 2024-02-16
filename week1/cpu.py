@@ -1,18 +1,18 @@
 from abc import ABC, abstractmethod
 
 
-class CPU(ABC):
+class Cpu(ABC):
     @abstractmethod
     def process(self, tasks: list[int]) -> list[list[int]]:
         pass
 
 
-class SingleCoreCPU(CPU):
+class SingleCoreCPU(Cpu):
     def process(self, tasks: list[int]) -> list[list[int]]:
         return [tasks]
 
 
-class DoubleCoreCPU(CPU):
+class DoubleCoreCPU(Cpu):
 
     def process(self, tasks: list[int]) -> list[list[int]]:
         return [tasks[::2], tasks[1::2]]
@@ -20,10 +20,10 @@ class DoubleCoreCPU(CPU):
 
 class CPUFactory:
     @staticmethod
-    def make_cpu(type) -> CPU:
-        if type == "singe":
+    def make_cpu(type) -> Cpu:
+        if type == "single":
             return SingleCoreCPU()
         elif type == "dual":
             return DoubleCoreCPU()
         else:
-            raise NotImplementedError(f"CPU type {type} not supported")
+            raise ValueError(f"CPU type {type} not supported")
