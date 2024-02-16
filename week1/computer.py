@@ -1,16 +1,15 @@
 from abc import ABC, abstractmethod
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from memory import Ram, Rom, RamFactory, RomFactory
-from cpu import Cpu, SingleCoreCPU, DoubleCoreCPU, CPUFactory
+from cpu import Cpu, CPUFactory
 
 
 class Computer(BaseModel, ABC):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     cpu: Cpu
     ram: Ram
     rom: Rom
-
-    class Config:
-        arbitrary_types_allowed = True
 
     @abstractmethod
     def bootstrap(self) -> dict[str, list[int] | list[list[int]]]:
