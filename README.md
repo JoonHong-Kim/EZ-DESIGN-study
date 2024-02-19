@@ -27,7 +27,9 @@ GoF의 23개 디자인 패턴 중에서 자주 보이는 패턴들을 비교하�
 2. Structural patterns - 객체와 클래스를 더 큰 구조로 합치는 방법을 다룹니다.
 3. Behavioral patterns - 객체 사이의 상호작용과 책임을 분산하는 방법을 다룹니다.
 
-### week 1
+# 하산 프로젝트
+
+## week 1
 
 - Factory Method
 - Abstract Factory
