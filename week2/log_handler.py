@@ -18,7 +18,7 @@ def log_request_handler(func):
         start_time = time.time()
         response = func(request, query)
         process_time = time.time() - start_time
-        logger.info(f"Request Processing time: {process_time}")
+        logger.info(f"Request Processing time: {process_time:4f}")
         logger.info(f"Response status code: {response.status_code}")
         return response
 
