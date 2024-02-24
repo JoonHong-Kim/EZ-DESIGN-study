@@ -1,9 +1,11 @@
-from fastapi import Request, Response
+from fastapi import Request
 from fastapi.responses import JSONResponse
 
 
 def exception_handler(func):
-    def wrapper(request: Request, query: str = None, message: str = None) -> Response:
+    def wrapper(
+        request: Request, query: str = None, message: str = None
+    ) -> JSONResponse:
         try:
             if message:
                 raise Exception(message)
