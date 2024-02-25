@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-
-from cpu import Cpu, CPUFactory
-from memory import Ram, RamFactory, Rom, RomFactory
 from pydantic import BaseModel, ConfigDict
+from memory import Ram, Rom, RamFactory, RomFactory
+from cpu import Cpu, CPUFactory
 
 
 class Computer(BaseModel, ABC):
