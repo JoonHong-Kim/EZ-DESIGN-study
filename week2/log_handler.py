@@ -9,9 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def log_request_handler(func):
-    def wrapper(
-        request: Request, query: str = None, message: str = None
-    ) -> JSONResponse:
+    def wrapper(request: Request, query: str = None) -> JSONResponse:
         logger.info(f"Request method: {request.method}")
         logger.info(f"Request url: {request.url}")
         logger.info(f"Client ip: {request.client.host}")

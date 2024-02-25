@@ -26,9 +26,7 @@ class Cache:
 
 
 def cache_response(func):
-    def wrapper(
-        request: Request, query: str = None, message: str = None
-    ) -> JSONResponse:
+    def wrapper(request: Request, query: str = None) -> JSONResponse:
         cache = Cache()
         key = (
             str(request.url),
@@ -38,7 +36,7 @@ def cache_response(func):
         )
         response = cache.get(key)
         if response is None:
-            response = func(request, query, message)
+            response = func(request, query)
             cache.set(key, response)
         return response
 
