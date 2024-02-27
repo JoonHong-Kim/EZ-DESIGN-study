@@ -1,9 +1,8 @@
 # week1/tests/test_computer.py
 import pytest
-
 from computer import ComputerBuilder
-from memory import RamFactory, RomFactory
 from cpu import CPUFactory
+from memory import RamFactory, RomFactory
 
 
 @pytest.mark.computer
