@@ -90,6 +90,10 @@ if __name__ == "__main__":
         clothes_list = []
         for clothes in MusinsaCollection:
             clothes_list.extend(clothes)
+            if len(clothes_list) > 1000:
+                clothes_list = clothes_list[:1000]
+                break
+
     elif args.mall == "wconcept":
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--headless")
