@@ -28,7 +28,6 @@ class Laptop(Computer):
 
 
 class Desktop(Computer):
-
     def bootstrap(self) -> dict[str, list[int] | list[list[int]]]:
         state = {}
         state["cpu_processed"] = self.cpu.process(tasks=[1, 2, 3, 4, 5, 6, 7, 8])

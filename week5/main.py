@@ -7,7 +7,6 @@ import plotly.graph_objs as go
 import psutil
 from dash import dcc, html
 from dash.dependencies import Input, Output
-
 from handlers import log_to_file, log_to_stdout, save_data
 from metrics import Metrics
 
@@ -32,9 +31,7 @@ app.layout = html.Div(
 app.layout = html.Div(
     [
         html.Div(  # make title and middle order
-            [
-                html.H1("Local Computer Dashboard", style={"textAlign": "center"}),
-            ]
+            [html.H1("Local Computer Dashboard", style={"textAlign": "center"}),]
         ),
         html.Hr(),
         html.Div(
@@ -51,29 +48,10 @@ app.layout = html.Div(
                 )
             ],
         ),
-        html.Div(
-            [
-                html.H3("cpu usage"),
-                dcc.Graph(id="cpu-graph"),
-            ]
-        ),
-        html.Div(
-            [
-                html.H3("memory usage"),
-                dcc.Graph(id="memory-graph"),
-            ]
-        ),
-        html.Div(
-            [
-                html.H3("disk usage"),
-                dcc.Graph(id="disk-graph"),
-            ]
-        ),
-        dcc.Interval(
-            id="interval-component",
-            interval=5 * 1000,
-            n_intervals=0,
-        ),
+        html.Div([html.H3("cpu usage"), dcc.Graph(id="cpu-graph"),]),
+        html.Div([html.H3("memory usage"), dcc.Graph(id="memory-graph"),]),
+        html.Div([html.H3("disk usage"), dcc.Graph(id="disk-graph"),]),
+        dcc.Interval(id="interval-component", interval=5 * 1000, n_intervals=0,),
     ]
 )
 
@@ -85,13 +63,7 @@ app.layout = html.Div(
         Output("memory-graph", "figure"),
         Output("disk-graph", "figure"),
     ],
-    [
-        Input(
-            "interval-component",
-            "n_intervals",
-        ),
-        Input("time-range", "value"),
-    ],
+    [Input("interval-component", "n_intervals",), Input("time-range", "value"),],
 )
 def update_graphs(n, v):
     metrics = Metrics()
