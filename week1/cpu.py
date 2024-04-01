@@ -13,7 +13,6 @@ class SingleCoreCPU(Cpu):
 
 
 class DoubleCoreCPU(Cpu):
-
     def process(self, tasks: list[int]) -> list[list[int]]:
         return [tasks[::2], tasks[1::2]]
 

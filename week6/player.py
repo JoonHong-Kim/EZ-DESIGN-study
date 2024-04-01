@@ -1,7 +1,6 @@
 import pickle
 
 import pygame
-
 from client import Client
 
 BLACK = 1

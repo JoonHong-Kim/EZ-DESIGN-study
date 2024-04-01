@@ -1,40 +1,24 @@
 import curses
 from curses import wrapper
 
-from commands import *
-from snapshot import *
+from calculator import EvalCalculator
+from commands import DeleteCharCommand, EnterCommand, InputCharCommand, UndoCommand
+from dependency_injector import containers, providers
+from snapshot import Caretaker, Originator
 
 
-class EvalCalculator:
-    def __init__(self):
-        self.expression = Originator("")
-        self.caretaker = Caretaker(self.expression)
-        self.results = []
-
-    def input_char(self, char: str):
-        self.expression.add_char(char)
-
-    def delete_char(self):
-        self.expression.delete_char()
-
-    def enter(self):
-        try:
-            self.caretaker.backup()
-            result = float(eval(str(self.expression)))
-            self.expression.restore(Memento(str(result)))
-            result = f"{self.expression} = {result:.3f}"
-            self.results.append(result)
-
-        except:
-            self.expression.restore(Memento("Invalid expression"))
-
-    def undo(self):
-        self.caretaker.undo()
-        self.results = self.results[:-1]
+class CalculatorContainer(containers.DeclarativeContainer):
+    expression = providers.Factory(Originator, state="")
+    caretaker = providers.Factory(Caretaker, originator=expression)
+    calculator = providers.Factory(
+        EvalCalculator, expression=expression, caretaker=caretaker
+    )
 
 
 def main(stdscr) -> None:
-    calc = EvalCalculator()
+    container = CalculatorContainer()
+    calc = container.calculator()
+
     curses.echo()
 
     while True:

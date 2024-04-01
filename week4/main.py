@@ -1,12 +1,13 @@
+import argparse
 from collections.abc import Iterable, Iterator
+
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-import argparse
-import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class Clothes:
@@ -49,11 +50,7 @@ class WebIterator(Iterator):
 
 
 class HTMLCollection(Iterable):
-    def __init__(
-        self,
-        collection: list[str],
-        selectors: dict[str, str],
-    ) -> None:
+    def __init__(self, collection: list[str], selectors: dict[str, str],) -> None:
         self._collection = collection
         self._selectors = selectors
 
