@@ -2,7 +2,8 @@ import curses
 from curses import wrapper
 
 from calculator import EvalCalculator
-from commands import DeleteCharCommand, EnterCommand, InputCharCommand, UndoCommand
+from commands import (DeleteCharCommand, EnterCommand, InputCharCommand,
+                      UndoCommand)
 from dependency_injector import containers, providers
 from snapshot import Caretaker, Originator
 
