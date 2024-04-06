@@ -1,9 +1,9 @@
-from constants import MODULE_METADATA
+from .constants import MODULE_METADATA
 
 INVALID_MODULE_CONFIG_MESSAGE = (
     "Invalid property '{}' passed into the @Module() decorator."
 )
-metadata_keys = [MODULE_METADATA.CONTROLLERS, MODULE_METADATA.PROVIDERS]
+metadata_keys = [MODULE_METADATA["CONTROLLERS"], MODULE_METADATA["PROVIDERS"]]
 
 
 def validateModuleKeys(keys: list[str]):
